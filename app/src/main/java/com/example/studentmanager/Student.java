@@ -48,4 +48,23 @@ public class Student {
         return type;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setYearBirth(String yearBirth) {
+        this.yearBirth = yearBirth;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public void setSpecialized(String specialized) {
+        this.specialized = specialized;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

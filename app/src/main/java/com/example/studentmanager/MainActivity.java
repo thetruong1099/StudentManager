@@ -61,14 +61,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (checkStatusButtonEdit) {
-            buttonEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    editStudent();
-                }
-            });
-        }
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editStudent();
+            }
+        });
 
         buttonRemove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
         idStudentEdit = Integer.parseInt(edtFindIDStudent.getText().toString().trim()) - 1;
         studentList.remove(idStudentEdit);
         edtFindIDStudent.setText("");
+        for (int i = idStudentEdit; i<studentList.size();i++){
+            studentList.get(i).setId(i+1);
+            idStudent=i+2;
+        }
         Log.d("ShowStudent", "Đã Xóa");
     }
 
@@ -196,26 +198,26 @@ public class MainActivity extends AppCompatActivity {
         if (nameStudent.length() == 0 || yearBirthStudent.length() == 0 || numberPhone.length() == 0 || specializedStudent.length() == 0) {
             Toast.makeText(this, "Không để trống các trường", Toast.LENGTH_SHORT).show();
         } else {
-            if (numberPhone.equals(studentList.get(idStudentEdit).getNumberPhone())) {
-                checkPhone = true;
-            } else {
-                for (Student student : studentList) {
-                    if (numberPhone.equals(student.getNumberPhone())) {
+            for (int i=0; i<studentList.size();i++){
+                if (i!=idStudentEdit&&numberPhone.equals(studentList.get(i).getNumberPhone())){
                         checkPhone = false;
                         break;
-                    }
                 }
             }
             if (checkPhone) {
-                Student student = new Student(idStudentEdit + 1, nameStudent, yearBirthStudent, numberPhone, specializedStudent, typeEducation);
-                studentList.set(idStudentEdit, student);
+                studentList.get(idStudentEdit).setName(nameStudent);
+                studentList.get(idStudentEdit).setYearBirth(yearBirthStudent);
+                studentList.get(idStudentEdit).setNumberPhone(numberPhone);
+                studentList.get(idStudentEdit).setSpecialized(specializedStudent);
+                studentList.get(idStudentEdit).setType(typeEducation);
                 Log.d("ShowStudent", "EditStudentNew: Name  Year  Phone  Specialized  Type Education");
-                Log.d("ShowStudent", "EditStudentNew: " + student.getName() + " " + student.getYearBirth() + " " +
-                        student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+                Log.d("ShowStudent", "EditStudentNew: " + studentList.get(idStudentEdit).getName() + " " + studentList.get(idStudentEdit).getYearBirth() + " " +
+                        studentList.get(idStudentEdit).getNumberPhone() + " " + studentList.get(idStudentEdit).getSpecialized() + " " + studentList.get(idStudentEdit).getType());
                 editTextName.setText("");
                 editTextYearBirth.setText("");
                 editTextNumberPhone.setText("");
                 editTextSpecialized.setText("");
+                editTextTypeEducation.setText("");
             } else {
                 Toast.makeText(this, "trung sdt", Toast.LENGTH_SHORT).show();
             }
@@ -231,7 +233,6 @@ public class MainActivity extends AppCompatActivity {
             editTextNumberPhone.setText(student.getNumberPhone());
             editTextSpecialized.setText(student.getSpecialized());
             editTextTypeEducation.setText(student.getType());
-            checkStatusButtonEdit = true;
             Student studentold = studentList.get(idStudentEdit);
             Log.d("ShowStudent", "EditStudentOld: Name  Year  Phone  Specialized  Type Education");
             Log.d("ShowStudent", "EditStudentOld: " + studentold.getName() + " " + studentold.getYearBirth() + " " +
