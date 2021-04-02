@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("ShowStudent", "searchStudent: " + student.getName() + " " + student.getYearBirth() + " " +
                         student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
             }
+            editTextSearch.setText("");
         } else Toast.makeText(this, "nhap key word", Toast.LENGTH_SHORT).show();
     }
 
