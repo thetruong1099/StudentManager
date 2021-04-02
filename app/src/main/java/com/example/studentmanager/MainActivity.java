@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (checkStatusButtonEdit){
+        if (checkStatusButtonEdit) {
             buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -122,39 +122,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void searchStudent() {
         Set<Student> studentSet = new HashSet<>();
-        String keyword = editTextSearch.getText().toString().trim().toLowerCase();
-        if(keyword.length()>0){
+        String keyword = VietnameseCharacterUtils.removeAccent(editTextSearch.getText().toString().trim().toLowerCase());
+        if (keyword.length() > 0) {
             for (Student student : studentList) {
-                if (VietnameseCharacterUtils.removeAccent(student.getName().toLowerCase()).contains(keyword)) {
-                    studentSet.add(student);
-                }
-                if (student.getYearBirth().toLowerCase().contains(keyword)) {
-                    studentSet.add(student);
-                }
-                if (student.getNumberPhone().toLowerCase().contains(keyword)) {
-                    studentSet.add(student);
-                }
-                if (VietnameseCharacterUtils.removeAccent(student.getSpecialized()).toLowerCase().contains(keyword)) {
-                    studentSet.add(student);
-                }
-                if (VietnameseCharacterUtils.removeAccent(student.getType()).toLowerCase().contains(keyword)) {
+                if (VietnameseCharacterUtils.removeAccent(student.getName().toLowerCase()).contains(keyword)
+                        || student.getYearBirth().toLowerCase().contains(keyword)
+                        || student.getNumberPhone().toLowerCase().contains(keyword)
+                        || VietnameseCharacterUtils.removeAccent(student.getSpecialized()).toLowerCase().contains(keyword)
+                        || VietnameseCharacterUtils.removeAccent(student.getType()).toLowerCase().contains(keyword)) {
                     studentSet.add(student);
                 }
             }
-
             Log.d("ShowStudent", "searchStudent: Name  Year  Phone  Specialized  Type Education");
             for (Student student : studentSet) {
-                Log.d("ShowStudent", "searchStudent: " + student.getName() + " " + student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+                Log.d("ShowStudent", "searchStudent: " + student.getName() + " " + student.getYearBirth() + " " +
+                        student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
             }
-        }
-        else Toast.makeText(this,"nhap key word",Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "nhap key word", Toast.LENGTH_SHORT).show();
     }
 
     private void filterBy(String type) {
         Log.d("ShowStudent", "Student: Name  Year  Phone  Specialized  Type Education");
         for (Student student : studentList) {
             if (student.getType().toLowerCase().equals(type))
-                Log.d("ShowStudent", "Student " + student.getId() + " " + student.getName() + " " + student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+                Log.d("ShowStudent", "Student " + student.getId() + " " + student.getName() + " " +
+                        student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
         }
     }
 
@@ -187,11 +179,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void removeStudent() {
         idStudentEdit = Integer.parseInt(edtFindIDStudent.getText().toString().trim()) - 1;
-        for (int i = idStudentEdit + 1; i < studentList.size(); i++) {
-            studentList.get(i).setId(i);
-        }
         studentList.remove(idStudentEdit);
         edtFindIDStudent.setText("");
+        Log.d("ShowStudent", "Đã Xóa");
     }
 
     private void editStudent() {
@@ -219,7 +209,8 @@ public class MainActivity extends AppCompatActivity {
                 Student student = new Student(idStudentEdit + 1, nameStudent, yearBirthStudent, numberPhone, specializedStudent, typeEducation);
                 studentList.set(idStudentEdit, student);
                 Log.d("ShowStudent", "EditStudentNew: Name  Year  Phone  Specialized  Type Education");
-                Log.d("ShowStudent", "EditStudentNew: " + student.getName() + " " + student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+                Log.d("ShowStudent", "EditStudentNew: " + student.getName() + " " + student.getYearBirth() + " " +
+                        student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
                 editTextName.setText("");
                 editTextYearBirth.setText("");
                 editTextNumberPhone.setText("");
@@ -242,7 +233,8 @@ public class MainActivity extends AppCompatActivity {
             checkStatusButtonEdit = true;
             Student studentold = studentList.get(idStudentEdit);
             Log.d("ShowStudent", "EditStudentOld: Name  Year  Phone  Specialized  Type Education");
-            Log.d("ShowStudent", "EditStudentOld: " + studentold.getName() + " " + studentold.getYearBirth() + " " + studentold.getNumberPhone() + " " + studentold.getSpecialized() + " " + student.getType());
+            Log.d("ShowStudent", "EditStudentOld: " + studentold.getName() + " " + studentold.getYearBirth() + " " +
+                    studentold.getNumberPhone() + " " + studentold.getSpecialized() + " " + student.getType());
 
         } catch (Exception e) {
             Toast.makeText(this, "nhap id", Toast.LENGTH_SHORT).show();
@@ -253,7 +245,8 @@ public class MainActivity extends AppCompatActivity {
     private void showListStudent() {
         Log.d("ShowStudent", "Student: Name  Year  Phone  Specialized  Type Education");
         for (Student student : studentList) {
-            Log.d("ShowStudent", "Student " + student.getId() + " " + student.getName() + " " + student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+            Log.d("ShowStudent", "Student " + student.getId() + " " + student.getName() + " " + student.getYearBirth() + " " +
+                    student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
         }
     }
 
@@ -279,7 +272,8 @@ public class MainActivity extends AppCompatActivity {
                 idStudent++;
                 studentList.add(student);
                 Log.d("ShowStudent", "addStudent: Name  Year  Phone  Specialized  Type Education");
-                Log.d("ShowStudent", "addStudent: " + student.getName() + " " + student.getYearBirth() + " " + student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
+                Log.d("ShowStudent", "addStudent: " + student.getName() + " " + student.getYearBirth() + " " +
+                        student.getNumberPhone() + " " + student.getSpecialized() + " " + student.getType());
                 editTextName.setText("");
                 editTextYearBirth.setText("");
                 editTextNumberPhone.setText("");
