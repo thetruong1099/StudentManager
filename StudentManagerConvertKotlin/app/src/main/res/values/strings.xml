@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">StudentManagerKotlin2</string>
+
+    <string-array name="type_Education">
+        <item>Đại Học</item>
+        <item>Cao Đẳng</item>
+    </string-array>
+</resources>
