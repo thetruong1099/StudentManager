@@ -111,12 +111,14 @@ class EditStudentDialog(
 
     private fun checkNumberPhone(numberphoneCheck: String): Boolean {
         var statusChecked = false
-        for (i in listNumberPhone) {
-            if (numberphoneCheck.equals(i)) {
-                statusChecked = true
-                break
-            }
-        }
+        var numberphoneFinded = listNumberPhone.find { it == numberphoneCheck }
+        if (numberphoneFinded != null) statusChecked = true
+//        for (i in listNumberPhone) {
+//            if (numberphoneCheck == i) {
+//                statusChecked = true
+//                break
+//            }
+//        }
         return statusChecked
     }
 
