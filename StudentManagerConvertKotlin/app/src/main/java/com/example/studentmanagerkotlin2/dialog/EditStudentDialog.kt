@@ -106,8 +106,8 @@ class EditStudentDialog(
 
     private fun checkNumberPhone(numberphoneCheck: String): Boolean {
         var statusChecked = false
-        var numberPhoneFind = listNumberPhone.find {it== numberphoneCheck}
-        if (numberPhoneFind==null) statusChecked = true
+        var numberPhoneFind:String? = listNumberPhone.find {it== numberphoneCheck}
+        numberPhoneFind?.let { statusChecked = true }
 //        for (i in listNumberPhone) {
 //            if (numberphoneCheck.equals(i)) {
 //                statusChecked = true
