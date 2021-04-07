@@ -55,7 +55,6 @@ class RecyclerListStudentAdapter(
             else studentListRemove.remove(arrayList[position])
         }
         if (statusChecked) holder.cbSelectStudent.isChecked = false
-//        Log.d("ShowStudent", "studentListRemoveAdapter: " + studentListRemove.toString())
     }
 
     override fun getItemCount(): Int {

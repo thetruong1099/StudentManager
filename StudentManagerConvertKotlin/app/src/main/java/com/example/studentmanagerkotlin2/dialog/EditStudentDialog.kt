@@ -33,8 +33,6 @@ class EditStudentDialog(
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.edit_student_dialog, container)
-//        Log.d("ShowStudent", "OldStudents: "+student.toString())
-//        Log.d("ShowStudent", "listNumberPhone1: "+listNumberPhone.toString())
         view.edt_Name_Edit.setText(name)
         view.edt_YearBirth_Edit.setText(yearBirth)
         view.edt_NumberPhone_Edit.setText(numberPhone)
@@ -74,7 +72,6 @@ class EditStudentDialog(
         specialized = edt_Specialized_Edit.text.toString().trim()
 
         var statusChecked = checkNumberPhone(numberPhone)
-//        Log.d("ShowStudent", "statusChecked: "+statusChecked)
         if (name.length == 0 || yearBirth.length == 0 || numberPhone.length == 0 || specialized.length == 0 || typeEducation.length == 0 || statusChecked) {
             Toast.makeText(
                 context,
@@ -84,7 +81,6 @@ class EditStudentDialog(
         } else {
             showAlertDialog()
         }
-//        Log.d("ShowStudent", "NewStudents: "+student.toString())
     }
 
     private fun showAlertDialog() {
@@ -98,7 +94,6 @@ class EditStudentDialog(
             student.specialized = specialized
             student.typeEducation = typeEducation
             listener.editStudent(student, position)
-//            Log.d("ShowStudent", "NewStudents: "+student.toString())
             Toast.makeText(context, "Đã sửa thành công", Toast.LENGTH_LONG).show()
             dismiss()
         }
@@ -111,12 +106,14 @@ class EditStudentDialog(
 
     private fun checkNumberPhone(numberphoneCheck: String): Boolean {
         var statusChecked = false
-        for (i in listNumberPhone) {
-            if (numberphoneCheck.equals(i)) {
-                statusChecked = true
-                break
-            }
-        }
+        var numberPhoneFind = listNumberPhone.find {it== numberphoneCheck}
+        if (numberPhoneFind==null) statusChecked = true
+//        for (i in listNumberPhone) {
+//            if (numberphoneCheck.equals(i)) {
+//                statusChecked = true
+//                break
+//            }
+//        }
         return statusChecked
     }
 

@@ -97,19 +97,18 @@ class MainActivity : AppCompatActivity(), AddStudentDialog.AddStudentDialogListe
         if (listStudent.size == 0) listStudent.add(student)
         else {
             var statusCheckPhone = true
-            for (i in listStudent) {
-                if (student.numberPhone.equals(i.numberPhone)) {
-                    statusCheckPhone = false
-                    break
-                }
-            }
+            var studentFinded = listStudent.find { it.numberPhone == student.numberPhone }
+//            for (i in listStudent) {
+//                if (student.numberPhone.equals(i.numberPhone)) {
+//                    statusCheckPhone = false
+//                    break
+//                }
+//            }
+            if (studentFinded==null) statusCheckPhone = false
             if (statusCheckPhone) listStudent.add(student)
             else Toast.makeText(this, "SDT bị trùng", Toast.LENGTH_SHORT).show()
         }
         listStudentAdapter.notifyDataSetChanged()
-//        Log.d("ShowStudent", "-------------------------------------")
-//        Log.d("ShowStudent", "applyStudents size: "+listStudent.size.toString())
-//        Log.d("ShowStudent", "applyStudents: "+listStudent.toString())
     }
 
 
@@ -120,7 +119,6 @@ class MainActivity : AppCompatActivity(), AddStudentDialog.AddStudentDialogListe
         var editStudentDialog = EditStudentDialog(listStudent[position], listNumberPhone, position)
         editStudentDialog.show(supportFragmentManager, "Custom Edit Dialog")
         editStudentDialog.isCancelable = false
-//        Log.d("ShowStudent", "listNumberPhone: "+listNumberPhone.toString())
     }
 
     private fun getListNumberPhone(position: Int): ArrayList<String> {
@@ -150,7 +148,6 @@ class MainActivity : AppCompatActivity(), AddStudentDialog.AddStudentDialogListe
         builder.setMessage("Bạn có chắc chắn muốn xóa không")
         builder.setPositiveButton("Yes") { dialogInterface, which ->
             val studentListRemove = listStudentAdapter.getStudentList()
-//            Log.d("ShowStudent", "studentListRemove: " + studentListRemove.toString())
 
             if (studentListRemove.size == 0) {
                 Toast.makeText(this, "Chọn sinh viên để xóa", Toast.LENGTH_LONG).show()
@@ -162,7 +159,6 @@ class MainActivity : AppCompatActivity(), AddStudentDialog.AddStudentDialogListe
                 studentListRemove.clear()
                 listStudentAdapter.notifyDataSetChanged()
 
-//                Log.d("ShowStudent", "RemoveStudents: " + listStudent.toString())
                 Toast.makeText(this, "Đã xóa thành công", Toast.LENGTH_LONG).show()
             }
         }

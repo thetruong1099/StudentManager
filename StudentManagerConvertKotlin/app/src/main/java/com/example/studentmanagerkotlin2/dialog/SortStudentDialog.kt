@@ -18,12 +18,10 @@ class SortStudentDialog(var studentList: ArrayList<Student>) : DialogFragment() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        Log.d("ShowStudent", "sort1: "+studentList.toString())
         val view: View = inflater.inflate(R.layout.sort_student_dialog, container)
 
         view.btn_SortByName.setOnClickListener {
             studentList.sortWith(compareBy { it.name })
-//            Log.d("ShowStudent", "sort2: "+studentList.toString())
             listener.sortStudent(studentList)
             dismiss()
         }

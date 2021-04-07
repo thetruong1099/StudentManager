@@ -40,7 +40,6 @@ class SearchStudentDialog(var studentList: ArrayList<Student>) : DialogFragment(
                 }
             }
             listener.searchStudent(list)
-//            Log.d("ShowStudent", "search: "+list.toString())
             dismiss()
         }
 

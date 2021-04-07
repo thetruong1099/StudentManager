@@ -26,7 +26,6 @@ class FilterStudentDialog(var studentList: ArrayList<Student>) : DialogFragment(
             } as ArrayList<Student>
 
             listener.filterStudent(list)
-//            Log.d("ShowStudent", "filter1: "+list.toString())
             dismiss()
         }
 
